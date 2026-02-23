@@ -10,7 +10,8 @@ param (
    [switch]$SelfSignedCert,
    [string]$CertPath,
    [string]$CertKeyPath,
-   [string]$CertPass
+   [string]$CertPass,
+   [string]$ExtraParams
 )
 
 if ($OAuth -and -not $CertPath -and -not $SelfSignedCert) {
@@ -115,6 +116,10 @@ if ($CertKeyPath) {
 
 if ($CertPass) {
    $params += "--pwd", $CertPass
+}
+
+if ($ExtraParams) {
+  $params += $ExtraParams.Split(" ")
 }
 
 if ($isLinux -or $isMacOS) {
